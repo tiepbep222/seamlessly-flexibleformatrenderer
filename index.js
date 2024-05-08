@@ -1,13 +1,11 @@
-function canPartition(nums) {
-  const sum = nums.reduce((acc, val) => acc + val, 0);
-  if (sum % 2 !== 0) return false;
-  const target = sum / 2;
-  const dp = new Array(target + 1).fill(false);
-  dp[0] = true;
-  for (const num of nums) {
-    for (let i = target; i >= num; i--) {
-      dp[i] = dp[i] || dp[i - num];
-    }
+function isValidBST(root) {
+  let prev = null;
+  return inorder(root);
+  function inorder(node) {
+    if (!node) return true;
+    if (!inorder(node.left)) return false;
+    if (prev !== null && node.val <= prev) return false;
+    prev = node.val;
+    return inorder(node.right);
   }
-  return dp[target];
 }
