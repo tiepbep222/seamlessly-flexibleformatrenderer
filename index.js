@@ -1,16 +1,7 @@
-function longestConsecutive(nums) {
-  const set = new Set(nums);
-  let longest = 0;
-  for (const num of set) {
-    if (!set.has(num - 1)) {
-      let currentNum = num;
-      let currentStreak = 1;
-      while (set.has(currentNum + 1)) {
-        currentNum++;
-        currentStreak++;
-      }
-      longest = Math.max(longest, currentStreak);
-    }
-  }
-  return longest;
+function pathSum(root, sum) {
+  if (!root) return false;
+  if (!root.left && !root.right && root.val === sum) return true;
+  return (
+    pathSum(root.left, sum - root.val) || pathSum(root.right, sum - root.val)
+  );
 }
